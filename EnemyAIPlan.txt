@@ -1,0 +1,39 @@
+AI plans
+
+When the AI is above 50% hp, the enemy AI attempts to find the closest distance they can reach to the players using A* pathfinding.
+As soon as the hp reduces below 25%, the AI uses the same path that it used to reach the player to escape, as it is the fastest method.
+
+Players and enemies cannot cross water, so must walk on the two bridges designed in the tilemap. 
+The A* pathfinding that would be implemented will generate a path that crosses these bridges since it is the shortest and quickest distance.
+A selection of nodes and edges would be implemented around the tilemap to provide the algorithm a Graph to follow, A* PathFinding doesn't see anything apart from the Graph designed.
+These nodes would be placed everywhere except the water as it is not crossable.
+The AI algorithm has to take into consideration of how many moves it has available as each turn provides only 5 steps.
+The frontier will move through the map, stop, and expand when it reaches obstacles.
+The method calculates the number of steps away from the destination, and the actual distance, then drawing a conclusion of the shortest path.
+Movement costs will be used to avoid certain areas that the AI cannot pass.
+
+
+PATHFINDING PSEUDOCODE
+
+while frontier is not empty():
+	current = get the current frontier
+	
+	if current == target:
+	break
+
+	for next_nodes in graph(current):
+		new_cost_of_movement = cost_atm + graph_cost
+
+		if next_nodes are not in the cost_atm or new_cost_of_movement  < cost_atm:
+		cost_atm = new_cost
+		priority = new_cost
+		put the next frontier
+
+Other enemies will use a decision tree which determines their behaviour. 
+The first selector node will determine whether or not the enemy has a hp over 50%.
+Its children selector nodes decide if the AI should attack the player, or retreat if its hp is at 25%.
+If its hp is sufficient, the enemy AI attacks the player, depending on how far away it is from the target. If the enemy is more than 3 tiles away from the player, it uses the ranged attack, if it is within it, it uses melee.
+If its hp is not sufficient, the AI returns back to a safe location away from the player, using the same path that the A* pathfinding produced.
+The decision tree decides the cheapest path per round.
+
+*See FlowChart Diagram in the project folder*
